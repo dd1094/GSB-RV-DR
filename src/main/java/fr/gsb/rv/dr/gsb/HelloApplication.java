@@ -1,8 +1,10 @@
 package fr.gsb.rv.dr.gsb;
 
+import fr.gsb.rv.dr.entites.Praticien;
 import fr.gsb.rv.dr.entites.Visiteur;
 import fr.gsb.rv.dr.modeles.ModeleGsbRv;
 import fr.gsb.rv.dr.technique.*;
+import fr.gsb.rv.dr.utilitaires.*;
 import fr.gsb.rv.dr.technique.PanneauRapports;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -22,6 +24,9 @@ import javafx.util.Pair;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import javafx.application.Application;
@@ -235,10 +240,12 @@ public class HelloApplication extends Application {
     private Scene scene;
     private BorderPane borderPane;
 
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        stage = primaryStage;
+        /*stage = primaryStage;
         stage.setTitle("Switching Scenes");
 
         //createPaneTwo vbox2 = new createPaneTwo();
@@ -397,6 +404,9 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
 
         stage.show();
+
+        */
+
     }
 
     /*private VBox createPaneOne() {
@@ -425,7 +435,34 @@ public class HelloApplication extends Application {
         borderPane.setCenter(pane);
     }
 
-    public static void main(String[] args) {
-        Application.launch(args);
+    public static void main(String[] args) throws ConnexionException {
+        //Application.launch(args);s
+        List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesistants();
+
+        /*if (praticiens == null){
+            System.out.println("Null");
+        }
+
+        for (Praticien unPraticien : praticiens){
+            System.out.println(unPraticien.toString());
+        }*/
+
+        /*Collections.sort(praticiens, new ComparateurCoefConfiance());
+
+        for (Praticien unPraticien : praticiens){
+            System.out.println(unPraticien);
+        }*/
+
+        /*Collections.sort(praticiens ,new ComparateurCoefNotoriete().reversed());
+
+        for (Praticien unPraticien : praticiens){
+            System.out.println(unPraticien);
+        }*/
+        Collections.sort(praticiens ,new ComparateurDateVisite());
+
+        for (Praticien unPraticien : praticiens){
+            System.out.println(unPraticien);
+        }
     }
+
 }

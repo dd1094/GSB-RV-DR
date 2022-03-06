@@ -19,10 +19,24 @@ public class Praticien {
         this.dateDerniereVisite = dateDerniereVisite;
         this.dernierCoefConfiance = dernierCoefConfiance;
     }
+
+    public Praticien(int numero, String nom, String ville){
+        this.numero = numero;
+        this.nom = nom;
+        this.ville = ville;;
+    }
     public Praticien(){}
 
     public String getNom(){
         return nom;
+    }
+
+    public String getVille(){
+        return ville;
+    }
+
+    public int getNumero(){
+        return numero;
     }
 
     public int getDernierCoefConfiance(){
@@ -71,4 +85,6 @@ public class Praticien {
                 ", date de dernière visiste = '" + dateDerniereVisite+ '\''+
                 '}';
     }
+
+
 }

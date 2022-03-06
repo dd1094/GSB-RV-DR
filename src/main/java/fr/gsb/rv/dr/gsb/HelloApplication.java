@@ -6,6 +6,7 @@ import fr.gsb.rv.dr.modeles.ModeleGsbRv;
 import fr.gsb.rv.dr.technique.*;
 import fr.gsb.rv.dr.utilitaires.*;
 import fr.gsb.rv.dr.technique.PanneauRapports;
+import fr.gsb.rv.dr.technique.PanneauPraticiens;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -378,7 +379,10 @@ public class HelloApplication extends Application {
                     }
                 }
         );
-
+        StackPane stackpane = new StackPane(vbox1,vbox3,vbox2);
+        vbox1.toBack();
+        vbox2.toBack();
+        vbox3.toFront();
 
 
 
@@ -394,7 +398,7 @@ public class HelloApplication extends Application {
         //borderPane.setCenter(vbox3.createPaneThree());
         //borderPane.setCenter(new VBox(vbox2.createPaneTwo()));
         //borderPane.setCenter(vbox1);
-        StackPane stackpane = new StackPane(vbox1,vbox3,vbox2);
+
         borderPane.setCenter(new StackPane(stackpane));
 
 

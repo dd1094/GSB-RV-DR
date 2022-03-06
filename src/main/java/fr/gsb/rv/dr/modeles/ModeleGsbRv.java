@@ -5,6 +5,9 @@ import fr.gsb.rv.dr.entites.Visiteur;
 import fr.gsb.rv.dr.technique.ConnexionBD;
 import fr.gsb.rv.dr.technique.ConnexionException;
 import javafx.collections.FXCollections;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -77,9 +80,11 @@ public class ModeleGsbRv {
                 return listePraticiens;
             }
 
+
             catch( Exception e ){
                 return null ;
             }
+
         }
     }
 

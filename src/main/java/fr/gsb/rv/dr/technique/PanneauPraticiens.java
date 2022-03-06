@@ -38,15 +38,42 @@ import fr.gsb.rv.dr.gsb.HelloApplication;
 
 public class PanneauPraticiens {
 
+    public final int CRITERE_COEF_CONFIANCE = 1;
+    public final int CRITERE_COEF_NOTOTRIETE = 2;
+    public final int CRITERE_COEF_VISITE = 3;
+
+    private int critereTri = CRITERE_COEF_CONFIANCE;
+
+    private RadioButton rbCoefConfiance;
+    private RadioButton rbCoefNotoriete;
+    private RadioButton rbDateVisite;
+
     VBox vbox = new VBox();
+    ToggleGroup groupeBouton = new ToggleGroup();
 
     public VBox PanneauPraticiens() {
 
-        Label textPraticien = new Label();
-        textPraticien.setText("Praticien");
-        vbox = new VBox(textPraticien);
+        //Label textPraticien = new Label();
+        //textPraticien.setText("Praticien");
+
         vbox.setStyle("-fx-background-color: white");
 
+        ToggleGroup groupeBouton = new ToggleGroup();
+        RadioButton rbCoefConfiance = new RadioButton("Coef Confiance");
+        RadioButton rbCoefNotoriete = new RadioButton("Coef Notoriété");
+        RadioButton rbDateVisite = new RadioButton("Coef date de visite");
+
+        rbCoefConfiance.setToggleGroup(groupeBouton);
+        rbCoefNotoriete.setToggleGroup(groupeBouton);
+        rbDateVisite.setToggleGroup(groupeBouton);
+
+        rbCoefConfiance.setSelected(true);
+
+        vbox = new VBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);
         return vbox;
     }
+
+    public void rafraichir(){}
+
+    public void getCritereTri( int critereTri){}
 }

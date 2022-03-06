@@ -43,7 +43,7 @@ public class PanneauAccueil {
     public VBox PanneauAccueil() {
 
         Label textAccueil = new Label();
-        textAccueil.setText("Praticien");
+        textAccueil.setText("Accueil");
         vbox = new VBox(textAccueil);
         vbox.setStyle("-fx-background-color: white");
 

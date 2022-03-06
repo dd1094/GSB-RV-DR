@@ -245,7 +245,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        /*stage = primaryStage;
+        stage = primaryStage;
         stage.setTitle("Switching Scenes");
 
         //createPaneTwo vbox2 = new createPaneTwo();
@@ -397,15 +397,14 @@ public class HelloApplication extends Application {
         StackPane stackpane = new StackPane(vbox1,vbox3,vbox2);
         borderPane.setCenter(new StackPane(stackpane));
 
-        vbox2.toBack();
-        vbox1.toFront();
+
 
         scene = new Scene(borderPane, 800, 500);
         stage.setScene(scene);
 
         stage.show();
 
-        */
+
 
     }
 
@@ -435,9 +434,9 @@ public class HelloApplication extends Application {
         borderPane.setCenter(pane);
     }
 
-    public static void main(String[] args) throws ConnexionException {
-        //Application.launch(args);s
-        List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesistants();
+    public static void main(String[] args){
+        Application.launch();
+        //List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesistants();
 
         /*if (praticiens == null){
             System.out.println("Null");
@@ -453,16 +452,11 @@ public class HelloApplication extends Application {
             System.out.println(unPraticien);
         }*/
 
-        /*Collections.sort(praticiens ,new ComparateurCoefNotoriete().reversed());
+        /*Collections.sort(praticiens , new ComparateurCoefNotoriete().reversed());
 
         for (Praticien unPraticien : praticiens){
             System.out.println(unPraticien);
         }*/
-        Collections.sort(praticiens ,new ComparateurDateVisite());
-
-        for (Praticien unPraticien : praticiens){
-            System.out.println(unPraticien);
-        }
     }
 
 }

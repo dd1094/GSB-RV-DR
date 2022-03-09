@@ -8,6 +8,7 @@ import fr.gsb.rv.dr.technique.ConnexionBD;
 import fr.gsb.rv.dr.technique.ConnexionException;
 import fr.gsb.rv.dr.technique.Session;
 import fr.gsb.rv.dr.technique.VueConnexion;
+import fr.gsb.rv.dr.utilitaires.ComparateurCoefNotoriete;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -29,6 +30,7 @@ import javafx.util.Pair;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,29 +84,44 @@ public class PanneauPraticiens {
 
         rbCoefConfiance.setSelected(true);
 
-        Praticien praticien = new Praticien(1,"d","d");
 
         TableView <Praticien> tableView= new TableView();
         TableColumn<Praticien, Integer> colNumero = new TableColumn<Praticien, Integer>("Numero");
         colNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
 
         TableColumn<Praticien,String> colNom = new TableColumn<Praticien, String>("Nom");
-        colNom.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
 
         TableColumn<Praticien,String> colVille = new TableColumn<Praticien, String>("Ville");
-        colVille.setCellValueFactory(new PropertyValueFactory<>("Ville"));
+        colVille.setCellValueFactory(new PropertyValueFactory<>("ville"));
 
+
+
+
+
+        try {
+            List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesistants();
+            for (Praticien unPraticien : praticiens){
+                Praticien praticien = new Praticien(unPraticien.getNumero(), unPraticien.getNom(), unPraticien.getVille());
+                tableView.getItems().add(praticien);
+            }
+        } catch (ConnexionException e) {
+            e.printStackTrace();
+        }
+        rbCoefConfiance.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+
+                    }
+                }
+        );
 
         Label lbl  = new Label();
-        lbl.setText(praticien.getNom());
-
-
 
         tableView.getColumns().add(colNumero);
         tableView.getColumns().add(colNom);
         tableView.getColumns().add(colVille);
-
-        tableView.getItems().add(praticien);
 
 
         //vbox = new VBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);
@@ -114,10 +131,10 @@ public class PanneauPraticiens {
         return vbox;
     }
 
-    /*public void rafraichir() throws ConnexionException {
+    public void rafraichir() throws ConnexionException {
         List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesistants();
         ObservableList<Praticien> e = FXCollections.observableArrayList();
-    }*/
+    }
 
     public void getCritereTri( int critereTri){}
 }

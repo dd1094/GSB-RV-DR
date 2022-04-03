@@ -8,7 +8,9 @@ import fr.gsb.rv.dr.technique.ConnexionBD;
 import fr.gsb.rv.dr.technique.ConnexionException;
 import fr.gsb.rv.dr.technique.Session;
 import fr.gsb.rv.dr.technique.VueConnexion;
+import fr.gsb.rv.dr.utilitaires.ComparateurCoefConfiance;
 import fr.gsb.rv.dr.utilitaires.ComparateurCoefNotoriete;
+import fr.gsb.rv.dr.utilitaires.ComparateurDateVisite;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -56,8 +58,12 @@ public class PanneauPraticiens {
     private RadioButton rbCoefNotoriete;
     private RadioButton rbDateVisite;
 
+    private List<Praticien> praticiens ;
+    private ObservableList<Praticien> observableListPraticiens ;
+
     VBox vbox = new VBox();
     ToggleGroup groupeBouton = new ToggleGroup();
+    private TableView<Praticien> tableView = new TableView<>();
 
     public VBox PanneauPraticiens() {
 
@@ -76,6 +82,15 @@ public class PanneauPraticiens {
         /*GridPane gridPane = new GridPane();
         gridPane.setHgap(gridPane , a);*/
 
+        rbCoefConfiance.setOnAction(ActionEvent -> {
+            this.setCritereTri(CRITERE_COEF_CONFIANCE);
+            try {
+                this.rafraichir();
+            } catch (ConnexionException e) {
+                e.printStackTrace();
+            }
+        });
+
         GridPane.setHalignment(rbCoefConfiance, HPos.RIGHT);
 
         rbCoefConfiance.setToggleGroup(groupeBouton);
@@ -85,45 +100,77 @@ public class PanneauPraticiens {
         rbCoefConfiance.setSelected(true);
 
 
-        TableView <Praticien> tableView= new TableView();
-        TableColumn<Praticien, Integer> colNumero = new TableColumn<Praticien, Integer>("Numero");
-        colNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
-
-        TableColumn<Praticien,String> colNom = new TableColumn<Praticien, String>("Nom");
-        colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-
-        TableColumn<Praticien,String> colVille = new TableColumn<Praticien, String>("Ville");
-        colVille.setCellValueFactory(new PropertyValueFactory<>("ville"));
-
-
-
-
-
         try {
+
+        praticiens = ModeleGsbRv.getPraticiensHesistants();
+        observableListPraticiens =FXCollections.observableArrayList(praticiens);
+
+        TableColumn<Praticien, Integer> colNumero = new TableColumn<Praticien, Integer>("Numero");
+        TableColumn<Praticien,String> colNom = new TableColumn<Praticien, String>("Nom");
+        TableColumn<Praticien,String> colVille = new TableColumn<Praticien, String>("Ville");
+
+        colNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        tableView.getColumns().add(colNumero);
+
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        tableView.getColumns().add(colNom);
+
+        colVille.setCellValueFactory(new PropertyValueFactory<>("ville"));
+        tableView.getColumns().add(colVille);
+        //Collections.sort(praticiens, new ComparateurCoefNotoriete());
+            
+        tableView.setItems(observableListPraticiens);
+        this.rafraichir();
+
+        } catch (ConnexionException e) {
+            e.printStackTrace();
+        }
+
+        /*try {
             List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesistants();
+            //Collections.sort(praticiens, new ComparateurCoefNotoriete());
             for (Praticien unPraticien : praticiens){
                 Praticien praticien = new Praticien(unPraticien.getNumero(), unPraticien.getNom(), unPraticien.getVille());
                 tableView.getItems().add(praticien);
             }
+
         } catch (ConnexionException e) {
             e.printStackTrace();
-        }
-        rbCoefConfiance.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
+        }*/
+        rbCoefConfiance.setOnAction(ActionEvent -> {
+            this.setCritereTri(CRITERE_COEF_CONFIANCE);
+            try {
+                this.rafraichir();
+            } catch (ConnexionException e) {
+                e.printStackTrace();
+            }
+        });
 
-                    }
-                }
-        );
+        rbCoefNotoriete.setOnAction(ActionEvent -> {
+            this.setCritereTri(CRITERE_COEF_NOTOTRIETE);
+            try {
+                this.rafraichir();
+            } catch (ConnexionException e) {
+                e.printStackTrace();
+            }
+        });
+
+        rbDateVisite.setOnAction(ActionEvent -> {
+            this.setCritereTri(CRITERE_COEF_VISITE);
+            try {
+                this.rafraichir();
+            } catch (ConnexionException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Collections.sort(praticiens, new ComparateurCoefConfiance());
+
+        for (Praticien unPraticien : praticiens){
+            System.out.println(unPraticien);
+        }
 
         Label lbl  = new Label();
-
-        tableView.getColumns().add(colNumero);
-        tableView.getColumns().add(colNom);
-        tableView.getColumns().add(colVille);
-
-
         //vbox = new VBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);
         HBox hbox1= new HBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);
         vbox.setStyle("-fx-background-color: white");
@@ -131,10 +178,34 @@ public class PanneauPraticiens {
         return vbox;
     }
 
+
     public void rafraichir() throws ConnexionException {
-        List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesistants();
-        ObservableList<Praticien> e = FXCollections.observableArrayList();
+        praticiens = ModeleGsbRv.getPraticiensHesistants();
+        observableListPraticiens = FXCollections.observableArrayList(praticiens);
+
+        if(this.getCritereTri() == CRITERE_COEF_CONFIANCE){
+            observableListPraticiens.sort(new ComparateurCoefConfiance());
+            tableView.setItems(observableListPraticiens);
+        }
+        else if (this.getCritereTri() == CRITERE_COEF_NOTOTRIETE){
+            observableListPraticiens.sort(new ComparateurCoefNotoriete());
+            tableView.setItems(observableListPraticiens);
+        }
+        else if (this.getCritereTri() == CRITERE_COEF_VISITE){
+            observableListPraticiens.sort(new ComparateurDateVisite());
+            tableView.setItems(observableListPraticiens);
+        }
+
+        /*praticiens = ModeleGsbRv.getPraticiensHesistants();
+        observableListPraticiens = FXCollections.observableArrayList();
+        observableListPraticiens.sort(new ComparateurCoefNotoriete());
+        tableView.setItems(observableListPraticiens);*/
+    }
+    public int getCritereTri() {
+        return critereTri;
     }
 
-    public void getCritereTri( int critereTri){}
+    public void setCritereTri(int critereTri) {
+        this.critereTri = critereTri;
+    }
 }

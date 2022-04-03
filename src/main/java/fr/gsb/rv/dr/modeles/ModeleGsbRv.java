@@ -61,10 +61,10 @@ public class ModeleGsbRv {
                     "INNER JOIN Praticien as P \n" +
                     "on R.pra_num = P.pra_num\n" +
                     "where rap_date_visite in(\n" +
-                    "                        select max(rap_date_visite)    \n" +
-                    "                        from RapportVisite \n" +
-                    "                        group by pra_num\n" +
-                    "                        )" +
+                    "    select max(rap_date_visite)    \n" +
+                    "    from RapportVisite \n" +
+                    "    group by pra_num\n" +
+                    "    )" +
                     "and rap_coefconfiance < 5;";
 
 

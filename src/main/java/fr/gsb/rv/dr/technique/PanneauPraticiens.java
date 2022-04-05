@@ -75,9 +75,9 @@ public class PanneauPraticiens {
         //vbox.setStyle("-fx-background-color: white");
 
         ToggleGroup groupeBouton = new ToggleGroup();
-        RadioButton rbCoefConfiance = new RadioButton("Coef Confiance");
-        RadioButton rbCoefNotoriete = new RadioButton("Coef Notoriété");
-        RadioButton rbDateVisite = new RadioButton("Coef date de visite");
+        RadioButton rbCoefConfiance = new RadioButton("Confiance");
+        RadioButton rbCoefNotoriete = new RadioButton("Notoriété");
+        RadioButton rbDateVisite = new RadioButton("Date Visite");
 
         /*GridPane gridPane = new GridPane();
         gridPane.setHgap(gridPane , a);*/
@@ -118,8 +118,10 @@ public class PanneauPraticiens {
         colVille.setCellValueFactory(new PropertyValueFactory<>("ville"));
         tableView.getColumns().add(colVille);
         //Collections.sort(praticiens, new ComparateurCoefNotoriete());
-            
+
         tableView.setItems(observableListPraticiens);
+
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.rafraichir();
 
         } catch (ConnexionException e) {
@@ -173,6 +175,7 @@ public class PanneauPraticiens {
         Label lbl  = new Label();
         //vbox = new VBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);
         HBox hbox1= new HBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);
+
         vbox.setStyle("-fx-background-color: white");
         vbox= new VBox(hbox1,tableView,lbl);
         return vbox;

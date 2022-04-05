@@ -44,21 +44,17 @@ import static javafx.application.Application.launch;
 
 public class HelloApplication extends Application {
 
-
-
     Visiteur visiteur;
 
     private Stage stage;
     private Scene scene;
     private BorderPane borderPane;
 
-
-
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         stage = primaryStage;
-        stage.setTitle("Switching Scenes");
+        stage.setTitle("GSB-RV-DR");
 
         //createPaneTwo vbox2 = new createPaneTwo();
         //createPaneThree vbox3 = new createPaneThree();
@@ -111,6 +107,7 @@ public class HelloApplication extends Application {
                                 if (visiteur != null){
                                     Session.ouvrir(new Visiteur(visiteur.getMatricule(), visiteur.getNom(), visiteur.getPrenom()));
                                     System.out.println("Connecté!!");
+                                    stage.setTitle(visiteur.getPrenom()+" "+visiteur.getNom());
                                     menuRapports.setDisable(false);
                                     menuPraticiens.setDisable(false);
                                     itemSeDeconnecter.setDisable(false);

@@ -112,10 +112,13 @@ public class ModeleGsbRv {
         String requete = "select * from RapportVisite\n" +
                 "where vis_matricule = ?\n" +
                 "and month(rap_date_saisie) = ?\n" +
-                "and year(rap_date_saisie) = ?";
+                "and year(rap_date_saisie) = ?;";
 
         try {
             PreparedStatement requetePreparee = (PreparedStatement) connexion.prepareStatement(requete);
+            requetePreparee.setString(1, matricule);
+            requetePreparee.setInt(2, mois);
+            requetePreparee.setInt(3, annee);
             ResultSet resultat = requetePreparee.executeQuery();
             while (resultat.next()) {
                 RapportVisite rapportVisite = new RapportVisite();
@@ -130,10 +133,13 @@ public class ModeleGsbRv {
             }
             return ListeRapportVisite;
         } catch (Exception e) {
+            System.out.println(e);
             return null;
         }
     }
-    public void setRapporVisiteLu(String matricule, int numRapport) throws ConnexionException {
+
+
+    public static void setRapportVisiteLu(String matricule, int numRapport) throws ConnexionException {
         Connection connexion = ConnexionBD.getConnexion();
 
         String requete="UPDATE RapportVisite\n" +
@@ -142,10 +148,15 @@ public class ModeleGsbRv {
                 "and rap_num = ?";
         try {
             PreparedStatement requetePreparee = (PreparedStatement) connexion.prepareStatement(requete);
+            requetePreparee.setString(1, matricule);
+            requetePreparee.setInt(2, numRapport);
             ResultSet resultat = requetePreparee.executeQuery();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e);
         }
+    }
+
+    public static void setRapportVisite() {
     }
 }
 

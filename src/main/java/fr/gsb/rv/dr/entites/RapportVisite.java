@@ -71,4 +71,17 @@ public class RapportVisite {
     public void setLu(boolean lu) {
         this.lu = lu;
     }
+
+    @Override
+    public String toString() {
+        return "RapportVisite{" +
+                "numero=" + numero +
+                ", dateVisite=" + dateVisite +
+                ", dateRedaction=" + dateRedaction +
+                ", bilan='" + bilan + '\'' +
+                ", motif='" + motif + '\'' +
+                ", coefConfiance=" + coefConfiance +
+                ", lu=" + lu +
+                '}';
+    }
 }

@@ -1,6 +1,7 @@
 package fr.gsb.rv.dr.gsb;
 
 import fr.gsb.rv.dr.entites.Praticien;
+import fr.gsb.rv.dr.entites.RapportVisite;
 import fr.gsb.rv.dr.entites.Visiteur;
 import fr.gsb.rv.dr.modeles.ModeleGsbRv;
 import fr.gsb.rv.dr.technique.*;
@@ -212,8 +213,26 @@ public class HelloApplication extends Application {
         borderPane.setCenter(pane);
     }
 
-    public static void main(String[] args){
-        Application.launch();
+    public static void main(String[] args) throws ConnexionException {
+        //Application.launch();
+
+
+        for (Mois unMois : Mois.values()){
+            System.out.println(unMois);
+        }
+
+        /*List<Visiteur> visiteurs = ModeleGsbRv.getVisiteur();
+
+        for (Visiteur unVisiteur : visiteurs){
+            System.out.println(unVisiteur);
+        }*/
+
+        /*List<RapportVisite> rapportVisites = ModeleGsbRv.getRapportVisite("a131",1,2021);
+        for (RapportVisite unRapportVisite : rapportVisites){
+            System.out.println(unRapportVisite);
+        }*/
+
+        //ModeleGsbRv.setRapportVisiteLu("a17",4);
         //List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesistants();
 
         /*if (praticiens == null){

@@ -168,10 +168,6 @@ public class PanneauPraticiens {
 
         Collections.sort(praticiens, new ComparateurCoefConfiance());
 
-        for (Praticien unPraticien : praticiens){
-            System.out.println(unPraticien);
-        }
-
         Label lbl  = new Label();
         //vbox = new VBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);
         HBox hbox1= new HBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);

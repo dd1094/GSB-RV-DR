@@ -2,78 +2,76 @@ package fr.gsb.rv.dr.technique;
 
 import fr.gsb.rv.dr.entites.Praticien;
 import fr.gsb.rv.dr.entites.Visiteur;
-import fr.gsb.rv.dr.gsb.HelloApplication;
 import fr.gsb.rv.dr.modeles.ModeleGsbRv;
-import fr.gsb.rv.dr.technique.ConnexionBD;
-import fr.gsb.rv.dr.technique.ConnexionException;
-import fr.gsb.rv.dr.technique.Session;
-import fr.gsb.rv.dr.technique.VueConnexion;
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.util.Pair;
 
-import java.io.File;
-import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
-
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import fr.gsb.rv.dr.gsb.HelloApplication;
 
 public class PanneauRapports {
 
     VBox vbox = new VBox();
 
-    private ComboBox<Visiteur> cbVisiteurs;
-    private ComboBox<Integer> cbMois;
+
+    /*private ComboBox<Mois> cbMois;
     private ComboBox<Integer> cbAnnee;
+    private ComboBox<Praticien> cbPraticien;*/
 
     private ObservableList<Visiteur> observableListVisiteur;
     private ObservableList<Mois> observableListMois;
+    private ObservableList<Integer> observableListAnnee;
+    private ObservableList<Praticien> observableListPraticiens;
+
 
     private List<Visiteur> visiteurs;
-    private Mois[] mois;
+    private List<Praticien> praticiens;
 
-    private enum mois;
 
     public VBox PanneauRapports() throws ConnexionException {
 
-        visiteurs = ModeleGsbRv.getVisiteur();
+        ComboBox<Visiteur> cbVisiteurs = new ComboBox<>();
+        visiteurs = ModeleGsb Rv.getVisiteur();
         observableListVisiteur = FXCollections.observableArrayList(visiteurs);
         cbVisiteurs.setItems(observableListVisiteur);
 
-        mois = Mois.values();
-        observableListMois = FXCollections.observableArrayList(mois);
+        ComboBox<Mois> cbMois = new ComboBox<>();
+        observableListMois = FXCollections.observableArrayList(Mois.values());
+        cbMois.setItems(observableListMois);
 
+        LocalDate aujourdhui = LocalDate.now();
+        int anneeCourante = aujourdhui.getYear();
 
+        ComboBox<Integer> cbAnnee = new ComboBox<>();
+        observableListAnnee = FXCollections.observableArrayList(anneeCourante);
+        cbAnnee.setItems(observableListAnnee);
+
+        Button bValider = new Button("Valider");
+
+        bValider.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                rafraichir();
+            }
+        });
+
+        HBox hbox1= new HBox(cbVisiteurs,cbMois,cbAnnee);
+        HBox hbox2= new HBox(bValider);
 
         Label textRapports = new Label();
         textRapports.setText("Rapports");
-        vbox = new VBox(textRapports);
+        vbox = new VBox(textRapports,hbox1,hbox2);
         vbox.setStyle("-fx-background-color: white");
 
         return vbox;
     }
-    public void rafraichir(){}
+    public void rafraichir(){
+        Visiteur selectedVisiteur =  ;
+    }
 
 }

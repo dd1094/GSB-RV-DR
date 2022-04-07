@@ -214,12 +214,10 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) throws ConnexionException {
-        //Application.launch();
-
-
-        for (Mois unMois : Mois.values()){
+        Application.launch();
+        /*for (Mois unMois : Mois.values()){
             System.out.println(unMois);
-        }
+        }*/
 
         /*List<Visiteur> visiteurs = ModeleGsbRv.getVisiteur();
 

@@ -54,10 +54,6 @@ public class PanneauPraticiens {
 
     private int critereTri = CRITERE_COEF_CONFIANCE;
 
-    private RadioButton rbCoefConfiance;
-    private RadioButton rbCoefNotoriete;
-    private RadioButton rbDateVisite;
-
     private List<Praticien> praticiens ;
     private ObservableList<Praticien> observableListPraticiens ;
 
@@ -103,7 +99,7 @@ public class PanneauPraticiens {
         try {
 
         praticiens = ModeleGsbRv.getPraticiensHesistants();
-        observableListPraticiens =FXCollections.observableArrayList(praticiens);
+        observableListPraticiens = FXCollections.observableArrayList(praticiens);
 
         TableColumn<Praticien, Integer> colNumero = new TableColumn<Praticien, Integer>("Numero");
         TableColumn<Praticien,String> colNom = new TableColumn<Praticien, String>("Nom");

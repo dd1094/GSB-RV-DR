@@ -2,7 +2,9 @@ package fr.gsb.rv.dr.entites;
 
 import java.time.LocalDate;
 
+
 public class RapportVisite {
+    private Praticien lePratiecien;
     private int numero;
     private LocalDate dateVisite;
     private LocalDate dateRedaction;
@@ -10,6 +12,17 @@ public class RapportVisite {
     private String motif;
     private int coefConfiance;
     private boolean lu;
+
+    public RapportVisite(Praticien lePratiecien ,int numero, LocalDate dateVisite, LocalDate dateRedaction, String bilan, String motif, int coefConfiance, boolean lu){
+        this.lePratiecien = lePratiecien;
+        this.numero = numero;
+        this.dateVisite = dateVisite;
+        this.dateRedaction = dateRedaction;
+        this.bilan = bilan;
+        this.motif = motif;
+        this.coefConfiance = coefConfiance;
+        this.lu = lu;
+    }
 
     public RapportVisite(int numero, LocalDate dateVisite, LocalDate dateRedaction, String bilan, String motif, int coefConfiance, boolean lu){
         this.numero = numero;
@@ -72,10 +85,23 @@ public class RapportVisite {
         this.lu = lu;
     }
 
+    public boolean isLu() {
+        return lu;
+    }
+
+    public Praticien getLePratiecien() {
+        return lePratiecien;
+    }
+
+    public void setLePratiecien(Praticien lePratiecien) {
+        this.lePratiecien = lePratiecien;
+    }
+
     @Override
     public String toString() {
         return "RapportVisite{" +
-                "numero=" + numero +
+                "lePratiecien=" + lePratiecien +
+                ", numero=" + numero +
                 ", dateVisite=" + dateVisite +
                 ", dateRedaction=" + dateRedaction +
                 ", bilan='" + bilan + '\'' +

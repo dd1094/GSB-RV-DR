@@ -61,10 +61,10 @@ public class PanneauPraticiens {
     ToggleGroup groupeBouton = new ToggleGroup();
     private TableView<Praticien> tableView = new TableView<>();
 
-    public VBox PanneauPraticiens() {
+    public VBox PanneauPraticiens() throws ConnexionException {
 
 
-
+        this.rafraichir();
         //Label textPraticien = new Label();
         //textPraticien.setText("Praticien");
 

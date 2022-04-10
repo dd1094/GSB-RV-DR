@@ -195,6 +195,8 @@ public class HelloApplication extends Application {
 
 
 
+
+
         borderPane.setTop(new VBox(barreMenus));
         Label textAccueil = new Label();
         textAccueil.setText("Accueil");

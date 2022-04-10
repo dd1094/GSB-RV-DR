@@ -108,8 +108,11 @@ public class ModeleGsbRv {
     public static List<RapportVisite> getRapportVisite( String matricule, int mois, int annee) throws ConnexionException {
         Connection connexion = ConnexionBD.getConnexion();
         List<RapportVisite> ListeRapportVisite = new ArrayList<>();
+        List<Praticien> ListePraticien = new ArrayList<>();
 
-        String requete = "select * from RapportVisite\n" +
+        String requete = "select * from RapportVisite as r\n" +
+                "INNER join Praticien as p\n" +
+                "on r.pra_num = p.pra_num \n" +
                 "where vis_matricule = ?\n" +
                 "and month(rap_date_saisie) = ?\n" +
                 "and year(rap_date_saisie) = ?;";
@@ -121,7 +124,18 @@ public class ModeleGsbRv {
             requetePreparee.setInt(3, annee);
             ResultSet resultat = requetePreparee.executeQuery();
             while (resultat.next()) {
+
+                Praticien praticiens = new Praticien();
+                praticiens.setNumero(resultat.getInt("R.pra_num"));
+                praticiens.setNom(resultat.getString("pra_nom"));
+                praticiens.setVille(resultat.getString("pra_ville"));
+                praticiens.setCoefNotoriete(resultat.getDouble("pra_coefnotoriete"));
+                praticiens.setDateDerniereVisite(resultat.getDate("rap_date_visite").toLocalDate());
+                praticiens.setDernierCoefConfiance(resultat.getInt("rap_coefconfiance"));
+                ListePraticien.add(praticiens);
+
                 RapportVisite rapportVisite = new RapportVisite();
+                rapportVisite.setLePratiecien(praticiens);
                 rapportVisite.setNumero(resultat.getInt("rap_num"));
                 rapportVisite.setDateVisite(resultat.getDate("rap_date_visite").toLocalDate());
                 rapportVisite.setDateRedaction(resultat.getDate("rap_date_saisie").toLocalDate());
@@ -130,6 +144,8 @@ public class ModeleGsbRv {
                 rapportVisite.setCoefConfiance(resultat.getInt("rap_coefconfiance"));
                 rapportVisite.setLu(resultat.getBoolean("rap_lu"));
                 ListeRapportVisite.add(rapportVisite);
+
+
             }
             return ListeRapportVisite;
         } catch (Exception e) {

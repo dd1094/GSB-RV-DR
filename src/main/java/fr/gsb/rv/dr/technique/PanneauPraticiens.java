@@ -20,6 +20,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -61,7 +62,7 @@ public class PanneauPraticiens {
     ToggleGroup groupeBouton = new ToggleGroup();
     private TableView<Praticien> tableView = new TableView<>();
 
-    public VBox PanneauPraticiens() throws ConnexionException {
+    public BorderPane PanneauPraticiens() throws ConnexionException {
 
 
         this.rafraichir();
@@ -164,15 +165,29 @@ public class PanneauPraticiens {
 
         Collections.sort(praticiens, new ComparateurCoefConfiance());
 
-        Label lbl  = new Label();
+        Label lbl  = new Label("Veuillez choisir votre tri de séléction");
+        HBox hbox1 = new HBox(lbl);
+        hbox1.setSpacing(10);
+        hbox1.setPadding(new Insets(15,20, 10,10));
+
         //vbox = new VBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);
-        HBox hbox1= new HBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);
+        HBox hbox2= new HBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);
+        hbox2.setSpacing(25);
+        hbox2.setPadding(new Insets(0,20, 10,10));
 
+        Image logo = new Image(getClass().getResourceAsStream("/GSB_LOGO.png"), 70, 70, true, true);
+        VBox vLogo= new VBox(new ImageView(logo));
+        vLogo.setAlignment(Pos.CENTER);
+        VBox hautG = new VBox(hbox1,hbox2);
 
-
-        vbox= new VBox(hbox1,tableView,lbl);
+        HBox haut = new HBox(hautG, vLogo);
+        haut.setSpacing(70);
+        vbox = new VBox(haut,tableView);
         vbox.setStyle("-fx-background-color: white");
-        return vbox;
+        BorderPane root = new BorderPane();
+        root.setCenter(vbox);
+
+        return root;
     }
 
 

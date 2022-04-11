@@ -452,14 +452,22 @@ CREATE TABLE `RapportVisite` (
 
 LOCK TABLES `RapportVisite` WRITE;
 /*!40000 ALTER TABLE `RapportVisite` ENABLE KEYS */;
-INSERT INTO RapportVisite VALUES ('a131',1,'2021-01-15','Bonne visite',4,'2021-01-15','Apporte de bonne infos',1,1);
-INSERT INTO RapportVisite VALUES ('a131',2,'2021-02-15','Très bonne visite',5,'2021-02-15','Apporte de très bonne infos',1,1);
-INSERT INTO RapportVisite VALUES ('a17',3,'2021-03-15','Bonne visite',2,'2021-03-15','Apporte de bonne infos',0,2);
-INSERT INTO RapportVisite VALUES ('a17',4,'2021-04-15','Très bonne visite',3,'2021-04-15','Apporte de très bonne infos',0,2);
-INSERT INTO RapportVisite VALUES ('e24',5,'2021-05-15','Très bonne visite',3,'2021-05-15','Apporte de très bonne infos',0,3);
-INSERT INTO RapportVisite VALUES ('e22',3,'2021-06-15','Très bonne visite',5,'2021-06-15','Pourris',0,3);
-INSERT INTO RapportVisite VALUES ('l56',7,'2021-02-15','Très bonne visite',4,'2021-06-15','Pourris',0,24);
-INSERT INTO RapportVisite VALUES ('p40',8,'2021-01-15','Très bonne visite',0,'2021-06-15','Pourris',0,45);
+INSERT INTO RapportVisite VALUES ('a131',1,'2022-03-15','Le praticien ne s''est pas montré receptif',2,'2022-03-16','Nouveau produit à promouvoir',1,1);
+INSERT INTO RapportVisite VALUES ('a131',2,'2022-03-02','Le praticien a été convaincu par ma prestation',5,'2022-03-03',"Remontage",1,2);
+INSERT INTO RapportVisite VALUES ('a131',9,'2022-03-22','Le praticien ne fait plus confiance à notre laboratoire',1,'2022-03-23','Besoin de précision sur le produit',0,4);
+INSERT INTO RapportVisite VALUES ('a131',10,'2022-03-28','Le praticien s''est montré hésitant',4,'2022-03-29','Visite periodique',0,5);
+INSERT INTO RapportVisite VALUES ('a131',11,'2022-03-09','Le praticien ne s''est pas montré receptif',2,'2022-03-10','Nouveau produit à promouvoir',0,6);
+
+INSERT INTO RapportVisite VALUES ('a17',12,'2021-02-15','Le praticien ne s''est pas montré receptif',2,'2021-02-17','Nouveau produit à promouvoir',0,2);
+INSERT INTO RapportVisite VALUES ('a17',4,'2021-02-22','Le praticien s''est montré hésitant',3,'2021-02-23','Remontage',0,7);
+INSERT INTO RapportVisite VALUES ('a17',13,'2021-02-03','Le praticien a été convaincu par ma prestation',5,'2021-02-04','Besoin de précision sur le produit',1,8);
+
+
+INSERT INTO RapportVisite VALUES ('a55',14,'2020-03-15','Le praticien ne s''est pas montré receptif',2,'2020-05-16','Besoin de précision sur le produit',1,3);
+INSERT INTO RapportVisite VALUES ('a55',15,'2020-03-01','Le praticien s''est montré hésitant',3,'2020-05-02','Besoin de précision sur le produit',0,42);
+INSERT INTO RapportVisite VALUES ('a55',16,'2020-03-20','Le praticien ne s''est pas montré receptif',4,'2020-05-21','Nouveau produit à promouvoir',1,68);
+INSERT INTO RapportVisite VALUES ('a55',17,'2020-03-25','Le praticien a été convaincu par ma prestation',5,'2020-05-26','Visite periodique',0,35);
+
 /*!40000 ALTER TABLE `RapportVisite` ENABLE KEYS */;
 UNLOCK TABLES;
 

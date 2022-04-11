@@ -114,8 +114,9 @@ public class ModeleGsbRv {
                 "INNER join Praticien as p\n" +
                 "on r.pra_num = p.pra_num \n" +
                 "where vis_matricule = ?\n" +
-                "and month(rap_date_saisie) = ?\n" +
-                "and year(rap_date_saisie) = ?;";
+                "and month(rap_date_visite) = ?\n" +
+                "and year(rap_date_visite) = ? \n" +
+                "order by rap_date_visite";
 
         try {
             PreparedStatement requetePreparee = (PreparedStatement) connexion.prepareStatement(requete);

@@ -25,7 +25,6 @@ public class VueRapportVisite {
 
         //TextField matricule = new TextField();
 
-        ButtonType loginButtonType = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -46,11 +45,11 @@ public class VueRapportVisite {
         grid.add(new Label("Ville du praticien"), 0, 2);
         grid.add(ville, 1, 2);
 
-        Text dateVisite = new Text(String.valueOf(rapportVisite.getDateVisite()));
+        Text dateVisite = new Text(String.valueOf(rapportVisite.getDateVisite().format(formateur)));
         grid.add(new Label("Date de la visite : "), 0, 3);
         grid.add(dateVisite, 1, 3);
 
-        Text dateRedaction = new Text(String.valueOf(rapportVisite.getDateRedaction()));
+        Text dateRedaction = new Text(String.valueOf(rapportVisite.getDateRedaction().format(formateur)));
         grid.add(new Label("Date de rédaction : "), 0, 4);
         grid.add(dateRedaction, 1, 4);
 
@@ -62,6 +61,10 @@ public class VueRapportVisite {
         grid.add(new Label("Motif : "), 0, 6);
         grid.add(motif, 1, 6);
 
+        Text confiance = new Text(String.valueOf(rapportVisite.getCoefConfiance()));
+        grid.add(new Label("Confiance : "), 0, 7);
+        grid.add(confiance, 1, 7);
+        ButtonType loginButtonType = new ButtonType("Retour", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(loginButtonType);
 
         /*grid.add(new Label(), 1, 0);

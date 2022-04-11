@@ -65,9 +65,9 @@ public class HelloApplication extends Application {
 
         panneauRapports.PanneauRapports();
 
-        BorderPane vbox1 = new BorderPane(panneauAccueil.PanneauAccueil());
-        BorderPane vbox2 = new BorderPane(panneauRapports.PanneauRapports());
-        BorderPane vbox3 = new BorderPane(panneauPraticiens.PanneauPraticiens());
+        BorderPane borderAccueil = new BorderPane(panneauAccueil.PanneauAccueil());
+        BorderPane borderRapport= new BorderPane(panneauRapports.PanneauRapports());
+        BorderPane borderPraticien = new BorderPane(panneauPraticiens.PanneauPraticiens());
 
 
         BorderPane borderPane = new BorderPane();
@@ -142,7 +142,7 @@ public class HelloApplication extends Application {
                         itemSeConnecter.setDisable(false);
                         primaryStage.setTitle("GSB-RV-DR");
                         //switchPanes(vbox1);
-                        vbox1.toFront();
+                        borderAccueil.toFront();
                         Session.fermer();
                     }
                 }
@@ -172,9 +172,9 @@ public class HelloApplication extends Application {
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
-                        vbox1.toBack();
-                        vbox3.toBack();
-                        vbox2.toFront();
+                        borderAccueil.toBack();
+                        borderPraticien.toBack();
+                        borderRapport.toFront();
                     }
                 }
         );
@@ -182,16 +182,17 @@ public class HelloApplication extends Application {
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
-                        vbox1.toBack();
-                        vbox2.toBack();
-                        vbox3.toFront();
+                        borderAccueil.toBack();
+                        borderRapport.toBack();
+                        borderPraticien.toFront();
                     }
                 }
         );
-        StackPane stackpane = new StackPane(vbox1,vbox3,vbox2);
-        vbox1.toBack();
-        vbox2.toBack();
-        vbox3.toFront();
+
+        StackPane stackpane = new StackPane(borderAccueil,borderPraticien,borderRapport);
+        borderAccueil.toFront();
+        borderRapport.toBack();
+        borderPraticien.toBack();
 
 
 

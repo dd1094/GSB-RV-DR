@@ -105,7 +105,7 @@ public class PanneauRapports extends StackPane {
         observableListRapportVisite = FXCollections.observableArrayList(rapportVisites);*/
 
         TableColumn<RapportVisite, Integer> colNumero = new TableColumn<RapportVisite, Integer>("Numero");
-        TableColumn<RapportVisite,String> colNom = new TableColumn<RapportVisite,String>("Nom");
+        TableColumn<RapportVisite,String> colNom = new TableColumn<RapportVisite,String>("Praticien");
         TableColumn<RapportVisite,String> colVille = new TableColumn<RapportVisite,String>("Ville");
         TableColumn<RapportVisite,LocalDate> colDateVisite = new TableColumn<RapportVisite, LocalDate>("Visite");
         TableColumn<RapportVisite,LocalDate> colDateRedaction = new TableColumn<RapportVisite, LocalDate>("Redaction");
@@ -223,20 +223,21 @@ public class PanneauRapports extends StackPane {
         HBox hbox1= new HBox(cbVisiteurs,cbMois,cbAnnee);
         hbox1.setSpacing(10);
         hbox1.setPadding(new Insets(15,20, 10,10));
+
         HBox hbox2= new HBox(bValider);
         hbox2.setPadding(new Insets(0,20, 10,10));
 
-        Label textRapports = new Label();
-        textRapports.setText("Rapports");
-        //vbox = new VBox(textRapports,hbox1,hbox2,tableView);
         Image logo = new Image(getClass().getResourceAsStream("/GSB_LOGO.png"), 70, 70, true, true);
         VBox vLogo= new VBox(new ImageView(logo));
         vLogo.setAlignment(Pos.CENTER);
+
         VBox hautG = new VBox(hbox1,hbox2);
+
         HBox haut = new HBox(hautG, vLogo);
+
         vbox = new VBox(haut,tableView);
         vbox.setStyle("-fx-background-color: white");
-        final BorderPane root = new BorderPane();
+        BorderPane root = new BorderPane();
         root.setCenter(vbox);
 
         return root;

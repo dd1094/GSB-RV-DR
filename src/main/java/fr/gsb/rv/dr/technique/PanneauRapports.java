@@ -10,20 +10,29 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Window;
 import javafx.util.Callback;
+import javafx.util.Pair;
 import org.w3c.dom.events.MouseEvent;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class PanneauRapports {
+public class PanneauRapports extends StackPane {
 
     VBox vbox = new VBox();
 
@@ -46,9 +55,11 @@ public class PanneauRapports {
     private TableView<RapportVisite> tableView;
 
 
-    public VBox PanneauRapports() throws ConnexionException {
+    public BorderPane PanneauRapports() throws ConnexionException {
 
         tableView = new TableView<>();
+
+
 
         cbVisiteurs = new ComboBox<>();
         visiteurs = ModeleGsbRv.getVisiteur();
@@ -192,9 +203,10 @@ public class PanneauRapports {
                 try {
                     int indiceRapport = tableView.getSelectionModel().getSelectedIndex();
                     String matricule = cbVisiteurs.getValue().getMatricule();
-                    RapportVisite numeroRap = tableView.getSelectionModel().getSelectedItem();
-                    ModeleGsbRv.setRapportVisiteLu(matricule, numeroRap.getNumero());
-
+                    RapportVisite rapportVisite = tableView.getSelectionModel().getSelectedItem();
+                    ModeleGsbRv.setRapportVisiteLu(matricule, rapportVisite.getNumero());
+                    VueRapportVisite vueRapportVisite = new VueRapportVisite(rapportVisite);
+                    Optional<RapportVisite> response = vueRapportVisite.dialog.showAndWait();
                     this.rafraichir();
                 } catch (ConnexionException e) {
                     e.printStackTrace();
@@ -204,16 +216,30 @@ public class PanneauRapports {
 
         tableView.setItems(observableListRapportVisite);
         //this.rafraichir();
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+
 
         HBox hbox1= new HBox(cbVisiteurs,cbMois,cbAnnee);
+        hbox1.setSpacing(10);
+        hbox1.setPadding(new Insets(15,20, 10,10));
         HBox hbox2= new HBox(bValider);
+        hbox2.setPadding(new Insets(0,20, 10,10));
 
         Label textRapports = new Label();
         textRapports.setText("Rapports");
-        vbox = new VBox(textRapports,hbox1,hbox2,tableView);
+        //vbox = new VBox(textRapports,hbox1,hbox2,tableView);
+        Image logo = new Image(getClass().getResourceAsStream("/GSB_LOGO.png"), 70, 70, true, true);
+        VBox vLogo= new VBox(new ImageView(logo));
+        vLogo.setAlignment(Pos.CENTER);
+        VBox hautG = new VBox(hbox1,hbox2);
+        HBox haut = new HBox(hautG, vLogo);
+        vbox = new VBox(haut,tableView);
         vbox.setStyle("-fx-background-color: white");
+        final BorderPane root = new BorderPane();
+        root.setCenter(vbox);
 
-        return vbox;
+        return root;
     }
     public void rafraichir() throws ConnexionException {
         String matricule = cbVisiteurs.getValue().getMatricule();

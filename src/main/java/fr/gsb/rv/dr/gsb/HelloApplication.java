@@ -65,9 +65,9 @@ public class HelloApplication extends Application {
 
         panneauRapports.PanneauRapports();
 
-        VBox vbox1 = new VBox(panneauAccueil.PanneauAccueil());
-        VBox vbox2 = new VBox(panneauRapports.PanneauRapports());
-        VBox vbox3 = new VBox(panneauPraticiens.PanneauPraticiens());
+        BorderPane vbox1 = new BorderPane(panneauAccueil.PanneauAccueil());
+        BorderPane vbox2 = new BorderPane(panneauRapports.PanneauRapports());
+        BorderPane vbox3 = new BorderPane(panneauPraticiens.PanneauPraticiens());
 
 
         BorderPane borderPane = new BorderPane();

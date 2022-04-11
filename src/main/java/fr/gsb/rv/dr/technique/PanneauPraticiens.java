@@ -168,8 +168,10 @@ public class PanneauPraticiens {
         //vbox = new VBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);
         HBox hbox1= new HBox(rbCoefConfiance,rbCoefNotoriete,rbDateVisite);
 
-        vbox.setStyle("-fx-background-color: white");
+
+
         vbox= new VBox(hbox1,tableView,lbl);
+        vbox.setStyle("-fx-background-color: white");
         return vbox;
     }
 

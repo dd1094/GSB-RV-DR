@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -43,8 +44,11 @@ public class PanneauAccueil {
     public VBox PanneauAccueil() {
 
         Label textAccueil = new Label();
-        textAccueil.setText("Accueil");
-        vbox = new VBox(textAccueil);
+        //textAccueil.setText("Accueil");
+
+        Image logo = new Image(getClass().getResourceAsStream("/GSB_LOGO.png"), 400, 400, true, true);
+        vbox = new VBox(new ImageView(logo));
+        vbox.setAlignment(Pos.CENTER);
         vbox.setStyle("-fx-background-color: white");
 
         return vbox;
